@@ -20,19 +20,20 @@ export default function Navbar() {
 
   return (
     <nav className="nav-glass fixed top-0 left-0 right-0 z-50 border-b border-white/5">
-      
-      {/* INI YANG DIBENERIN: Balik lagi murni pakai w-full px-10 */}
-      <div className="w-full px-10 h-[68px] flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/logo.png" alt="Maju Fleet Logo" width={42} height={42} className="opacity-90" />
-          <span className="text-grad-logo font-grotesk font-bold text-[22px] tracking-[-1.2px] uppercase">
+      <div className="w-full px-5 h-[68px] flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-0 group">
+          <Image 
+            src="/logo.png" 
+            alt="Maju Fleet Logo" 
+            width={100} 
+            height={100} 
+            className="transition-transform group-hover:scale-105 -mr-4" 
+          />
+          <span className="text-grad-logo font-grotesk font-bold text-[26px] tracking-[-1.2px] uppercase">
             MAJU Fleet
           </span>
         </Link>
 
-        {/* Desktop Links (Di tengah) */}
         <div className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2">
           {links.map((l) => (
             <Link
@@ -49,7 +50,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="hidden md:block">
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
             <Link
@@ -65,13 +65,11 @@ export default function Navbar() {
           </motion.div>
         </div>
 
-        {/* Mobile toggle */}
         <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white/70 p-1">
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
