@@ -19,7 +19,9 @@ export default function Navbar() {
 
   return (
     <nav className="nav-glass fixed top-0 left-0 right-0 z-50 border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+      
+      {/* INI YANG DIUBAH: max-w dihapus sama sekali, murni w-full px-10 */}
+      <div className="w-full px-10 h-[68px] flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -29,8 +31,8 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-9">
+        {/* Desktop Links (Di tengah) */}
+        <div className="hidden md:flex items-center gap-9 absolute left-1/2 -translate-x-1/2">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -46,7 +48,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA (Di pojok kanan) */}
         <div className="hidden md:block">
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
             <Link

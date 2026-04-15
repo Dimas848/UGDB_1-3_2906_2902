@@ -30,7 +30,8 @@ function Toast({ show }: { show: boolean }) {
         >
           <CheckCircle size={18} style={{ color: "#BDF4FF" }} />
           <span className="font-grotesk font-medium text-[14px] text-text-primary">
-            ✓ Transmission Sent — We&apos;ll respond within 2 hours.
+            {/* Teks sudah diganti sesuai request */}
+            ✓ Message has been successfully sent
           </span>
         </motion.div>
       )}
@@ -70,7 +71,7 @@ export default function ContactForm() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="relative p-12 rounded-lg bg-bg-card"
+        className="relative p-12 rounded-lg bg-bg-card h-full flex flex-col"
         style={{ boxShadow: "0 25px 50px -12px rgba(0,0,0,0.3)" }}
       >
         {/* Purple left bar */}
@@ -79,61 +80,63 @@ export default function ContactForm() {
           style={{ background: "#B026FF" }}
         />
 
-        {/* Heading */}
-        <div className="flex items-center gap-3 mb-8">
-          <Shield size={16} style={{ color: "#E5B5FF" }} />
-          <h3 className="font-grotesk font-bold text-[22px] text-white">
+        {/* Heading - Disesuaikan agar lebih sejajar */}
+        <div className="flex items-center gap-3 mb-10">
+          <Shield size={18} style={{ color: "#E5B5FF" }} />
+          <h3 className="font-grotesk font-bold text-[28px] text-white uppercase tracking-tight">
             Contact Us
           </h3>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-7">
-          {/* Company Name */}
-          <div className="flex flex-col gap-2">
-            <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
-              Company Name
-            </label>
-            <input
-              type="text"
-              name="company"
-              value={form.company}
-              onChange={handleChange}
-              required
-              placeholder="Enter full legal entity"
-              className={inputBase}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-7 flex-1 justify-between">
+          <div className="flex flex-col gap-7">
+            {/* Company Name */}
+            <div className="flex flex-col gap-2">
+              <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
+                Company Name
+              </label>
+              <input
+                type="text"
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+                required
+                placeholder="Enter full legal entity"
+                className={inputBase}
+              />
+            </div>
 
-          {/* Email */}
-          <div className="flex flex-col gap-2">
-            <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              placeholder="secure@company.com"
-              className={inputBase}
-            />
-          </div>
+            {/* Email */}
+            <div className="flex flex-col gap-2">
+              <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                placeholder="secure@company.com"
+                className={inputBase}
+              />
+            </div>
 
-          {/* Message */}
-          <div className="flex flex-col gap-2">
-            <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
-              Message
-            </label>
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              placeholder="Brief of operation requirements..."
-              className={inputBase + " resize-none"}
-            />
+            {/* Message */}
+            <div className="flex flex-col gap-2">
+              <label className="font-grotesk text-[11px] uppercase tracking-[1.2px] text-cyan opacity-75">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                rows={6}
+                placeholder="Brief of operation requirements..."
+                className={inputBase + " resize-none"}
+              />
+            </div>
           </div>
 
           {/* Submit */}
@@ -142,7 +145,7 @@ export default function ContactForm() {
             disabled={loading}
             whileHover={!loading ? { scale: 1.02, boxShadow: "0 12px 40px -10px rgba(176,38,255,0.65)" } : {}}
             whileTap={!loading ? { scale: 0.98 } : {}}
-            className="w-full py-5 rounded font-grotesk font-black text-white text-[15px] uppercase tracking-[1.6px] flex items-center justify-center gap-3 transition-all duration-200 disabled:cursor-not-allowed"
+            className="w-full py-5 rounded font-grotesk font-black text-white text-[15px] uppercase tracking-[1.6px] flex items-center justify-center gap-3 transition-all duration-200 disabled:cursor-not-allowed mt-4"
             style={{
               background: loading ? "#7a1aaa" : "#B026FF",
               boxShadow: "0 10px 30px -10px rgba(176,38,255,0.5)",

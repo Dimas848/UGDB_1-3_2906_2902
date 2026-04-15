@@ -16,7 +16,7 @@ export default function Footer() {
             MAJU Fleet
           </p>
           <p className="text-[11px] tracking-[0.3px] mt-1 text-white/40">
-            © 2025 Maju Fleet. All rights reserved.
+            © 2026 Maju Fleet. All rights reserved.
           </p>
         </div>
 

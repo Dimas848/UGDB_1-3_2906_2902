@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { FadeUp } from "@/components/FadeUp";
 
 const metrics = [
-  { num: "500+",  label: "Active Vessels" },
-  { num: "99.9%", label: "Uptime" },
-  { num: "120",   label: "Global Ports" },
-  { num: "24/7",  label: "Monitoring" },
+  { num: "320+",   label: "Active Vessels" },
+  { num: "12M+",   label: "Tons Delivered" },
+  { num: "150+",   label: "Global Ports" },
+  { num: "24/7",   label: "Freight Ops" },
 ];
 
 export default function MetricsSection() {
@@ -16,10 +16,10 @@ export default function MetricsSection() {
       <div className="max-w-7xl mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[10px] uppercase tracking-[2px] text-cyan mb-3 font-inter">
-            Global Fleet Impact
+            Global Logistics Scale
           </p>
           <h2 className="font-grotesk font-bold text-[clamp(32px,4vw,48px)] tracking-[-2px] text-text-primary">
-            Numbers That Navigate
+            Numbers That Deliver
           </h2>
         </FadeUp>
 

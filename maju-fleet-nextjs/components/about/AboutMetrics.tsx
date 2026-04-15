@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { FadeUp } from "@/components/FadeUp";
 
+/* Developed by: Dimas Wicaksono Wibowo */
+
 const metrics = [
-  { num: "500+",  label: "Active Vessels" },
-  { num: "99.9%", label: "Uptime" },
-  { num: "120",   label: "Global Ports" },
-  { num: "24/7",  label: "Monitoring" },
+  { num: "320+",   label: "Active Vessels" },
+  { num: "12M+",   label: "Tons Delivered" },
+  { num: "150+",   label: "Global Ports" },
+  { num: "24/7",   label: "Freight Ops" },
 ];
 
 export default function AboutMetrics() {

@@ -49,19 +49,32 @@ function HUDCard({
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[88vh] flex items-center overflow-hidden bg-bg-dark">
-      {/* Decorative blobs */}
+    <section className="relative min-h-[88vh] flex items-center overflow-hidden">
+      
+      {/* --- BACKGROUND GAMBAR KAPAL --- */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        // Ganti nama file ini sesuai nama gambar yang kamu taruh di folder public
+        style={{ backgroundImage: "url('/shiphomebackground.png')" }} 
+      />
+      
+      {/* OVERLAY GELAP: Supaya teks putih tetap kebaca. Kiri lebih gelap, kanan agak transparan */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(to right, rgba(18,19,23,0.95) 0%, rgba(18,19,23,0.7) 50%, rgba(18,19,23,0.2) 100%)",
+        }}
+      />
+      {/* ------------------------------- */}
+
+      {/* Decorative blobs (tetap dipertahankan tapi opacity dikecilin dikit) */}
       <div
         className="absolute right-[-60px] top-1/4 w-96 h-96 rounded-xl pointer-events-none"
         style={{ background: "#B026FF", opacity: 0.05, filter: "blur(60px)" }}
       />
-      <div
-        className="absolute left-[-60px] bottom-1/4 w-80 h-80 rounded-xl pointer-events-none"
-        style={{ background: "#BDF4FF", opacity: 0.05, filter: "blur(50px)" }}
-      />
 
-      <div className="max-w-7xl mx-auto px-6 w-full py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* ── Left: Text ── */}
+      
+        <div className="relative z-10 max-w-[1500px] mx-auto px-8 w-full py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           {/* Live chip */}
           <motion.div
@@ -72,7 +85,7 @@ export default function HeroSection() {
           >
             <span className="w-2 h-2 rounded-full bg-[#00E3FD] animate-pulse-dot" />
             <span className="text-cyan text-[10px] font-medium uppercase tracking-[2px] font-inter">
-              Live Fleet Monitoring
+              Global Freight Operations
             </span>
           </motion.div>
 
@@ -86,9 +99,9 @@ export default function HeroSection() {
           >
             Maju Fleet:
             <br />
-            <span className="text-grad-purple">Navigating</span>
+            <span className="text-grad-purple">Delivering</span>
             <br />
-            the Future
+            the World
           </motion.h1>
 
           {/* Sub */}
@@ -98,8 +111,7 @@ export default function HeroSection() {
             transition={{ delay: 0.5 }}
             className="font-inter font-light text-[18px] leading-[1.7] text-text-muted/90 max-w-[440px] mb-10"
           >
-            Intelligent maritime logistics powered by real-time telemetry,
-            AI-driven insights, and global satellite connectivity.
+            Premier maritime logistics specializing in heavy cargo shipping, robust vessel operations, and end-to-end global freight management.
           </motion.p>
 
           {/* CTA */}
@@ -133,14 +145,14 @@ export default function HeroSection() {
 
         {/* ── Right: HUD ── */}
         <div className="hidden lg:flex flex-col items-end gap-4 opacity-85">
-          <HUDCard label="Global Coverage"  value="99.8%"  accent="#B026FF" delay={0.8} />
-          <HUDCard label="Route Efficiency" value="+24.5%" accent="#BDF4FF" delay={1.0} offsetRight="32px" />
-          <HUDCard label="Active Vessels"   value="1,240"  accent="#B026FF" delay={1.2} offsetRight="64px" />
+          <HUDCard label="Ports Reached" value="150+" accent="#B026FF" delay={0.8} />
+          <HUDCard label="Cargo Volume" value="12M+ Tons" accent="#BDF4FF" delay={1.0} offsetRight="32px" />
+          <HUDCard label="Active Fleet" value="320 Vessels" accent="#B026FF" delay={1.2} offsetRight="64px" />
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 pointer-events-none">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 pointer-events-none z-10">
         <span className="text-[10px] uppercase tracking-[3px] text-text-primary font-inter">
           Scroll to discover
         </span>

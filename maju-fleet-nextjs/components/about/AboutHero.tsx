@@ -35,19 +35,18 @@ export default function AboutHero() {
           transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="text-[10px] uppercase tracking-[2px] text-cyan mb-5 font-inter">
-            About Maju Fleet
+            Established 2026
           </p>
           <h1
             className="font-grotesk font-bold leading-[1] tracking-[-4px] text-text-primary mb-5"
             style={{ fontSize: "clamp(52px, 8vw, 90px)" }}
           >
-            TOGETHER
+            BRIDGING
             <br />
-            WE GROW
+            THE OCEANS
           </h1>
           <p className="font-inter font-light text-[20px] leading-[1.55] text-text-muted max-w-[520px]">
-            Pioneering the future of maritime operations through technology,
-            unity, and relentless innovation.
+            Pioneering the physical movement of global trade through robust vessel operations and uncompromising heavy cargo logistics.
           </p>
         </motion.div>
       </div>

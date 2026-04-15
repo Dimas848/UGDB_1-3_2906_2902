@@ -1,30 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Activity, Cpu, Globe } from "lucide-react";
+import { Ship, Package, Anchor } from "lucide-react";
 import { FadeUp } from "@/components/FadeUp";
 
 const features = [
   {
-    icon: Activity,
+    icon: Ship,
     accent: "#E5B5FF",
     border: "rgba(176,38,255,0.25)",
-    title: "Real-time Telemetry",
-    desc: "Continuous data streaming from every node in your fleet, providing unparalleled situational awareness.",
+    title: "Global Freight Forwarding",
+    desc: "Seamless port-to-port transportation of heavy cargo across major international trade routes.",
   },
   {
-    icon: Cpu,
+    icon: Package,
     accent: "#BDF4FF",
     border: "rgba(189,244,255,0.25)",
-    title: "Predictive Maintenance",
-    desc: "AI-driven insights that anticipate mechanical failures before they occur, reducing downtime by 40%.",
+    title: "Bulk Cargo Handling",
+    desc: "Specialized fleet equipped to safely manage, secure, and transport massive industrial cargo loads.",
   },
   {
-    icon: Globe,
+    icon: Anchor,
     accent: "#E5B5FF",
     border: "rgba(176,38,255,0.25)",
-    title: "Global Connectivity",
-    desc: "Seamless satellite integration ensuring your fleet is never out of reach, even in the most remote waters.",
+    title: "Robust Vessel Operations",
+    desc: "Modern fleet maintained to the highest physical standards, ensuring consistent and reliable delivery schedules.",
   },
 ];
 
@@ -34,16 +34,16 @@ export default function FeaturesSection() {
       <div className="max-w-7xl mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[10px] uppercase tracking-[2px] text-cyan mb-3 font-inter">
-            Platform Capabilities
+            Fleet Capabilities
           </p>
           <h2 className="font-grotesk font-bold text-[clamp(32px,4vw,48px)] tracking-[-2px] text-text-primary">
-            Intelligence at Sea
+            Global Cargo Operations
           </h2>
         </FadeUp>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {features.map((f, i) => (
-            <FadeUp key={i} delay={i * 0.12}>
+            <FadeUp key={i} delay={i * 0.12} className="h-full">
               <motion.div
                 whileHover={{ y: -6, boxShadow: `0 0 30px ${f.border}` }}
                 className="p-8 rounded-lg bg-bg-card2 h-full transition-shadow duration-300"

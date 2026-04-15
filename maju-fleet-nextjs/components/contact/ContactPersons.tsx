@@ -21,12 +21,15 @@ const persons = [
 
 export default function ContactPersons() {
   return (
-    <div className="flex flex-col gap-5">
+    // Tambahkan h-full di sini agar parent setinggi form di sebelahnya
+    <div className="flex flex-col gap-5 h-full">
       {persons.map((p, i) => (
-        <FadeUp key={i} delay={0.15 + i * 0.12}>
+        // Tambahkan flex-1 dan flex flex-col agar FadeUp ikut memanjang
+        <FadeUp key={i} delay={0.15 + i * 0.12} className="flex-1 flex flex-col">
           <motion.div
             whileHover={{ y: -3 }}
-            className="p-10 rounded-lg bg-bg-card transition-transform duration-300"
+            // Tambahkan flex-1 dan justify-center agar isi teks tetap di tengah saat kotaknya memanjang
+            className="p-10 rounded-lg bg-bg-card transition-transform duration-300 flex-1 flex flex-col justify-center"
             style={{ borderLeft: "2px solid rgba(189,244,255,0.2)" }}
           >
             <h3 className="font-grotesk font-bold text-[26px] tracking-[-0.75px] text-cyan mb-1">
@@ -57,29 +60,6 @@ export default function ContactPersons() {
         </FadeUp>
       ))}
 
-      {/* Response badge */}
-      <FadeUp delay={0.4}>
-        <div
-          className="p-6 rounded-lg text-center"
-          style={{
-            background: "rgba(176,38,255,0.06)",
-            border: "1px solid rgba(176,38,255,0.15)",
-          }}
-        >
-          <p className="font-inter text-[12px] text-text-muted/50 mb-1">
-            Response Time
-          </p>
-          <p className="font-grotesk font-bold text-[22px] text-purple mb-1">
-            &lt; 2 Hours
-          </p>
-          <p
-            className="font-inter text-[10px] uppercase tracking-[1px]"
-            style={{ color: "rgba(189,244,255,0.45)" }}
-          >
-            24/7 Command Center
-          </p>
-        </div>
-      </FadeUp>
     </div>
   );
 }
