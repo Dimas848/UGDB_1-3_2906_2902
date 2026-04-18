@@ -192,14 +192,14 @@ export default function Navbar() {
                     <label className="text-white/80 font-grotesk text-[10px] uppercase tracking-[2px] mb-2 block">Username</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#B026FF] opacity-80"><User size={16} /></div>
-                      <input type="text" required placeholder="Enter Crew ID..." className="w-full bg-[#121317] border border-[#B026FF]/30 rounded pl-12 pr-4 py-3 text-white font-inter text-[13px] placeholder-white/30 focus:outline-none focus:border-[#B026FF] transition-colors" />
+                      <input type="text" required placeholder="Enter username / email" className="w-full bg-[#121317] border border-[#B026FF]/30 rounded pl-12 pr-4 py-3 text-white font-inter text-[13px] placeholder-white/30 focus:outline-none focus:border-[#B026FF] transition-colors" />
                     </div>
                   </div>
                   <div>
                     <label className="text-white/80 font-grotesk text-[10px] uppercase tracking-[2px] mb-2 block">Password</label>
                     <div className="relative">
                       <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#B026FF] opacity-80"><Lock size={16} /></div>
-                      <input type={showLoginPassword ? "text" : "password"} required placeholder="Enter security key..." className="w-full bg-[#121317] border border-[#B026FF]/30 rounded pl-12 pr-12 py-3 text-white font-inter text-[13px] placeholder-white/30 focus:outline-none focus:border-[#B026FF] transition-colors" />
+                      <input type={showLoginPassword ? "text" : "password"} required placeholder="Enter password" className="w-full bg-[#121317] border border-[#B026FF]/30 rounded pl-12 pr-12 py-3 text-white font-inter text-[13px] placeholder-white/30 focus:outline-none focus:border-[#B026FF] transition-colors" />
                       <button type="button" onClick={() => setShowLoginPassword(!showLoginPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors">
                         {showLoginPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
@@ -369,4 +369,4 @@ export default function Navbar() {
       </AnimatePresence>
     </>
   );
-}
+} 
