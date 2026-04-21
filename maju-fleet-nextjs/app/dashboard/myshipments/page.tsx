@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Package, MapPin, Ship, Navigation, Clock, CheckCircle2, FileText, Activity, Anchor, Search, XCircle, RefreshCw, LogOut, UserCircle, X, ShieldCheck, Box, AlertCircle } from "lucide-react";
+import { Package, MapPin, Ship, Navigation, Clock, CheckCircle2, FileText, Activity, Anchor, Search, XCircle, RefreshCw, X, ShieldCheck, Box, AlertCircle } from "lucide-react";
+import UserNavbar from "@/components/usernavbar"; // <--- Import Navbar
 
-// --- DUMMY DATABASE UNTUK TRACKING ---
 const trackingDB: Record<string, any> = {
   "MJF-8821-X9": {
     status: "in_transit", progress: 65, origin: "Tanjung Priok, Jakarta (ID)", atd: "12 Apr 2026, 08:00 WIB", destination: "Port of Rotterdam (NL)", eta: "ETA: 04 May 2026, 14:30 CET", vessel: "EVER BLUE", package: "MAJU STANDARD", cargoDesc: "Lithium Batteries, 14.5T", cargoType: "Hazardous / Chemicals"
@@ -80,41 +78,10 @@ export default function MyShipmentsPage() {
         )}
       </AnimatePresence>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-white/5 h-[72px] flex items-center justify-between px-4 md:px-8">
-        <div className="flex items-center gap-2 lg:gap-3 shrink-0">
-          <Image src="/logo.png" alt="Logo" width={45} height={45} className="-mr-1" />
-          <span className="hidden sm:block text-white font-grotesk font-bold text-[16px] lg:text-[20px] tracking-[2px] uppercase mt-1">Maju Fleet</span>
-        </div>
+      {/* NAVBAR */}
+      <UserNavbar />
 
-        <div className="hidden md:flex flex-1 items-center justify-center gap-4 lg:gap-8 px-4 mt-1 overflow-x-auto no-scrollbar whitespace-nowrap">
-          <Link href="/dashboard/bookship" className="font-grotesk text-[11px] lg:text-[13px] uppercase tracking-[1px] pb-2 border-b-2 transition-all duration-300 text-white/60 border-transparent hover:text-[#E5B5FF] hover:border-[#B026FF] hover:[text-shadow:-1px_0_0_rgba(255,0,0,0.6),1px_0_0_rgba(0,255,255,0.6)]">
-            Book Shipment
-          </Link>
-          <Link href="/dashboard/myshipment" className="font-grotesk text-[11px] lg:text-[13px] uppercase tracking-[1px] pb-2 border-b-2 transition-all duration-300 text-[#E5B5FF] border-[#B026FF] font-bold [text-shadow:-1px_0_0_rgba(255,0,0,0.6),1px_0_0_rgba(0,255,255,0.6)]">
-            My Shipments
-          </Link>
-          <Link href="/dashboard/billing" className="font-grotesk text-[11px] lg:text-[13px] uppercase tracking-[1px] pb-2 border-b-2 transition-all duration-300 text-white/60 border-transparent hover:text-[#E5B5FF] hover:border-[#B026FF] hover:[text-shadow:-1px_0_0_rgba(255,0,0,0.6),1px_0_0_rgba(0,255,255,0.6)]">
-            Billing & History
-          </Link>
-        </div>
-
-        <div className="flex items-center gap-3 lg:gap-5 shrink-0">
-          <div className="hidden sm:flex items-center gap-2 text-right">
-            <div>
-              <p className="text-white font-grotesk font-bold text-[10px] lg:text-[11px] uppercase tracking-wide">Client Portal</p>
-              <p className="text-white/40 font-inter text-[9px] lg:text-[10px]">CRG-8992</p>
-            </div>
-            <UserCircle size={28} className="text-[#B026FF] ml-1" />
-          </div>
-          <div className="w-[1px] h-8 bg-white/10 hidden sm:block"></div>
-          {/* TOMBOL EXIT LANGSUNG KE ROOT '/' */}
-          <Link href="/" className="text-white/40 hover:text-red-400 transition-colors flex items-center gap-2 font-inter text-[10px] lg:text-[12px] uppercase tracking-[1px]">
-            <LogOut size={16} /> <span className="hidden sm:block">Exit</span>
-          </Link>
-        </div>
-      </nav>
-
-      <main className="flex-1 pt-32 pb-20 px-6 md:px-10 relative overflow-hidden">
+      <main className="flex-1 py-10 px-6 md:px-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#B026FF]/5 blur-[120px] pointer-events-none rounded-full" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#BDF4FF]/5 blur-[120px] pointer-events-none rounded-full" />
 
@@ -179,7 +146,6 @@ export default function MyShipmentsPage() {
               </AnimatePresence>
             </div>
 
-            {/* SISA KODE MY SHIPMENTS (Sama seperti sebelumnya) */}
             <AnimatePresence>
               {showTrackResult && currentTrackingData && (
                 <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">

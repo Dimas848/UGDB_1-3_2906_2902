@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { User, LogOut, Bell, TrendingUp, Activity, BarChart2, MoreVertical, Filter } from "lucide-react";
+import React, { useState } from "react";
+import { TrendingUp, Activity, BarChart2, MoreVertical, Filter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import AdminNavbar from "@/components/adminnavbar"; // <--- Import Navbar
 
 export default function AdminAnalyticsPage() {
-  const router = useRouter();
   const [analyticsChartType, setAnalyticsChartType] = useState<"LINE" | "BAR" | "PIE">("LINE");
   const [isAnalyticsMenuOpen, setIsAnalyticsMenuOpen] = useState(false);
   
@@ -16,25 +13,6 @@ export default function AdminAnalyticsPage() {
   
   const [isAnalyticsFilterOpen, setIsAnalyticsFilterOpen] = useState(false);
   const [chartTimeFilter, setChartTimeFilter] = useState<"Day" | "Week" | "Month">("Week");
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [currentTime, setCurrentTime] = useState<string>("Loading...");
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      setCurrentTime(`${year}-${month}-${day} ${hours}:${minutes}`);
-    };
-    updateClock();
-    const timerId = setInterval(updateClock, 1000);
-    return () => clearInterval(timerId);
-  }, []);
-
-  const handleLogout = () => router.push("/");
 
   const packageStatsData = {
     Day: [{ name: "MAJU ECONOMY", value: 15, color: "#6b21a8" }, { name: "MAJU STANDARD", value: 30, color: "#8b5cf6" }, { name: "MAJU HEAVY", value: 10, color: "#a855f7" }, { name: "MAJU EXPRESS", value: 45, color: "#c084fc" }, { name: "MAJU VIP", value: 25, color: "#e879f9" }],
@@ -77,40 +55,12 @@ export default function AdminAnalyticsPage() {
   const currentIncomeTimeData = incomeTimeSeries[chartTimeFilter];
 
   return (
-    // DIUBAH: Menggunakan h-screen dan overflow-hidden agar full layar tanpa scrolling berlebih
     <div className="absolute top-0 left-0 w-full h-screen bg-[#0a0a0c] z-50 text-white font-inter selection:bg-[#B026FF] selection:text-white overflow-hidden flex flex-col">
-      {/* NAVBAR */}
-      <nav className="shrink-0 z-50 h-[70px] flex items-center justify-between px-6 md:px-10 bg-[#0a0a0c]">
-        <div className="flex items-center gap-3 w-1/3">
-          <Image src="/logo.png" alt="Logo" width={45} height={45} className="-mr-1 opacity-90" />
-          <span className="font-grotesk font-bold text-2xl tracking-[3px] uppercase text-[#E5B5FF] drop-shadow-[0_0_10px_rgba(176,38,255,0.4)]">Maju Fleet</span>
-        </div>
-        
-        <div className="hidden lg:flex items-center justify-center gap-10 w-2/3 mt-2">
-          <Link href="/Dashboard-Admin/fleet" className="font-grotesk text-[13px] uppercase tracking-[2px] pb-2 transition-all text-white/50 hover:text-[#E5B5FF] border-b-2 border-transparent hover:border-[#B026FF]">FLEET</Link>
-          <Link href="/Dashboard-Admin/map" className="font-grotesk text-[13px] uppercase tracking-[2px] pb-2 transition-all text-white/50 hover:text-[#E5B5FF] border-b-2 border-transparent hover:border-[#B026FF]">MAP</Link>
-          <Link href="/Dashboard-Admin/analytics" className="font-grotesk text-[13px] uppercase tracking-[2px] pb-2 transition-all font-bold text-[#E5B5FF] border-b-2 border-[#B026FF]">ANALYTICS</Link>
-          <Link href="/Dashboard-Admin/register" className="font-grotesk text-[13px] uppercase tracking-[2px] pb-2 transition-all text-white/50 hover:text-[#E5B5FF] border-b-2 border-transparent hover:border-[#B026FF]">REGISTER</Link>
-          <Link href="/Dashboard-Admin" className="font-grotesk text-[13px] uppercase tracking-[2px] pb-2 transition-all text-white/50 hover:text-[#E5B5FF] border-b-2 border-transparent hover:border-[#B026FF]">LOGS</Link>
-        </div>
+      
+      {/* Panggil komponen AdminNavbar di sini */}
+      <AdminNavbar />
 
-        <div className="flex items-center justify-end gap-6 w-1/3">
-          <div className="relative cursor-pointer hover:opacity-80 transition-opacity">
-            <Bell size={20} className="text-white/60" />
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#FF3B30] rounded-full border-[2px] border-[#0a0a0c]"></div>
-          </div>
-          <div suppressHydrationWarning className="border border-[#B026FF]/50 bg-transparent rounded-full px-5 py-2 font-mono text-[11px] text-[#E5B5FF] tracking-widest shadow-[0_0_10px_rgba(176,38,255,0.1)]">{currentTime}</div>
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#B026FF] to-[#00E3FD] p-[2px] cursor-pointer hover:scale-105 transition-transform">
-            <div className="w-full h-full rounded-full bg-[#0a0a0c] flex items-center justify-center overflow-hidden"><User size={18} className="text-white/60"/></div>
-          </div>
-          <button onClick={() => setShowLogoutModal(true)} className="w-10 h-10 rounded-full border border-white/10 bg-[#121317] flex items-center justify-center text-white/50 hover:text-[#FF3B30] hover:border-[#FF3B30]/50 hover:bg-[#FF3B30]/10 transition-all"><LogOut size={16} /></button>
-        </div>
-      </nav>
-
-      <div className="w-full h-px bg-white/5 shrink-0 mb-6"></div>
-
-      <main className="w-full flex flex-1 overflow-hidden">
-        {/* DIUBAH: flex flex-col flex-1 agar div kiri otomatis menuhin layar ke bawah */}
+      <main className="w-full flex flex-1 overflow-hidden mt-4">
         <div className="flex-1 flex flex-col px-6 md:px-10 overflow-y-auto custom-scrollbar relative z-10 pb-6">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex flex-col flex-1 h-full">
             
@@ -140,7 +90,6 @@ export default function AdminAnalyticsPage() {
                   </div>
                 </div>
 
-                {/* DIUBAH: Tambahkan flex-1 dan min-h-[300px] pada kotak chart ini */}
                 <div className="bg-[#121317]/40 border border-white/5 rounded-xl p-8 flex flex-col relative flex-1 min-h-[300px]">
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="font-grotesk text-[18px] text-[#E5B5FF] uppercase tracking-[2px] font-bold">MOST USED PACKAGE TYPE</h3>
@@ -161,7 +110,6 @@ export default function AdminAnalyticsPage() {
                     </div>
                   </div>
 
-                  {/* DIUBAH: flex-1 digunakan agar inner container chart menyesuaikan height induk */}
                   <div className="flex-1 w-full relative flex items-center justify-center mt-4">
                     {analyticsChartType === "BAR" && (
                       <div className="flex-1 flex items-end border-b border-l border-white/10 w-full h-full relative pb-0 pl-12">
@@ -249,7 +197,6 @@ export default function AdminAnalyticsPage() {
                   </div>
                 </div>
 
-                {/* DIUBAH: Tambahkan flex-1 dan min-h-[300px] pada kotak chart ini */}
                 <div className="bg-[#121317]/40 border border-white/5 rounded-xl p-8 flex flex-col relative flex-1 min-h-[300px]">
                   <div className="flex justify-between items-start mb-6">
                     <div>
@@ -276,7 +223,6 @@ export default function AdminAnalyticsPage() {
                     </div>
                   </div>
 
-                  {/* DIUBAH: flex-1 digunakan agar inner container chart menyesuaikan height induk */}
                   <div className="flex-1 w-full relative flex items-center justify-center mt-4">
                     {analyticsChartType === "BAR" && (
                       <div className="flex-1 flex items-end border-b border-l border-white/10 w-full h-full relative pb-0 pl-12">
@@ -366,30 +312,14 @@ export default function AdminAnalyticsPage() {
               </AnimatePresence>
             </div>
           </div>
-          <p className="font-mono text-[11px] text-white/70 tracking-widest uppercase mb-10">LAST UPDATE: <br/> <span className="text-white font-bold mt-1 inline-block">{currentTime.split(' ')[0]}</span></p>
+          {/* Tanggal manual, menyesuaikan dengan UI jam realtime yang telah dipindah ke navbar */}
+          <p className="font-mono text-[11px] text-white/70 tracking-widest uppercase mb-10">LAST UPDATE: <br/> <span className="text-white font-bold mt-1 inline-block">2026-04-15</span></p>
           <div className="flex flex-col gap-2">
             <button onClick={() => setAnalyticsSidebarTab("TREND")} className={`flex items-center gap-4 px-4 py-4 rounded-lg font-mono text-[11px] tracking-widest uppercase transition-all text-left ${analyticsSidebarTab === "TREND" ? "bg-[#B026FF]/10 border-l-2 border-[#B026FF] text-[#E5B5FF] font-bold" : "text-white/40 hover:bg-white/5 hover:text-white"}`}><TrendingUp size={16} /> PACKAGE TREND</button>
             <button onClick={() => setAnalyticsSidebarTab("INCOME")} className={`flex items-center gap-4 px-4 py-4 rounded-lg font-mono text-[11px] tracking-widest uppercase transition-all text-left ${analyticsSidebarTab === "INCOME" ? "bg-[#B026FF]/10 border-l-2 border-[#B026FF] text-[#E5B5FF] font-bold" : "text-white/40 hover:bg-white/5 hover:text-white"}`}><Activity size={16} /> AVERAGE INCOME</button>
           </div>
         </div>
       </main>
-
-      {/* LOGOUT MODAL */}
-      <AnimatePresence>
-        {showLogoutModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowLogoutModal(false)} className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" />
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative bg-[#0a0a0c] border border-[#B026FF]/30 rounded-xl p-8 max-w-sm w-full shadow-[0_0_50px_rgba(176,38,255,0.15)] z-10 text-center">
-              <h2 className="text-white font-grotesk font-bold text-xl tracking-[2px] uppercase mb-3">System Logout</h2>
-              <p className="text-white/60 font-mono text-[11px] tracking-widest mb-8 leading-relaxed">Are you sure you want to terminate the current session and return to the main portal?</p>
-              <div className="flex gap-4">
-                <button onClick={() => setShowLogoutModal(false)} className="flex-1 py-3 border border-white/10 rounded-md text-white/60 hover:text-white hover:bg-white/5 font-grotesk text-[12px] uppercase tracking-[1px] transition-colors">Cancel</button>
-                <button onClick={handleLogout} className="flex-1 py-3 bg-[#FF3B30]/10 border border-[#FF3B30]/50 text-[#FF3B30] rounded-md hover:bg-[#FF3B30] hover:text-white font-grotesk text-[12px] font-bold uppercase tracking-[1px] transition-colors">Confirm Exit</button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       <style jsx global>{`.custom-scrollbar::-webkit-scrollbar { width: 4px; } .custom-scrollbar::-webkit-scrollbar-track { background: transparent; } .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; } .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(176, 38, 255, 0.5); }`}</style>
     </div>

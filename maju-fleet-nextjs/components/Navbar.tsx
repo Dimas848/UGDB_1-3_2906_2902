@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link"; // <-- Import Link dari next/link
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, User, Lock, Eye, EyeOff, RefreshCw, ShieldAlert, ArrowLeft, Mail, Phone, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Update links menggunakan path routing yang baru
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Our Services", href: "#services" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Services", href: "/services" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -20,9 +22,8 @@ export default function Navbar() {
   const [mainMenuDropdown, setMainMenuDropdown] = useState(false);
   const [activeModal, setActiveModal] = useState<"none" | "login" | "register" | "admin">("none");
   const [loading, setLoading] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
-
-  // State to detect when the user scrolls
+  
+  // Hapus state activeSection karena sekarang kita menggunakan pathname untuk mendeteksi halaman aktif
   const [isScrolled, setIsScrolled] = useState(false);
 
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -44,6 +45,8 @@ export default function Navbar() {
 
   useEffect(() => {
     generateCaptcha();
+    
+    // Set initial scroll state
     if (window.scrollY > 50) {
       setIsScrolled(true);
     } else {
@@ -54,60 +57,20 @@ export default function Navbar() {
       window.history.scrollRestoration = "manual";
     }
 
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
-
-    if (pathname === "/") {
-      window.scrollTo(0, 0);
-      setActiveSection("#home");
-    }
-
     const handleScroll = () => {
-      // 1. Check if the user has scrolled down
       if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
-
-      // 2. Track the active section based on scroll position
-      const sections = links.map(link => link.href.substring(1));
-      let current = "#home";
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 150) {
-          current = `#${section}`;
-        }
-      }
-      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+  }, []);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setMenuOpen(false);
-    setMainMenuDropdown(false);
-    
-    if (pathname !== "/") {
-      router.push(`/${href}`);
-      return;
-    }
-
-    const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 70,
-        behavior: "smooth",
-      });
-      setActiveSection(href);
-    }
-  };
-
+  // Hapus fungsi scrollToSection karena kita pindah ke multi-page
+  
   const getPasswordStrength = (pwd: string) => {
     let str = 0;
     if (pwd.length > 0) str += 25;
@@ -154,8 +117,8 @@ export default function Navbar() {
           
          {/* Logo */}
           <div className="flex items-center shrink-0">
-            <a href="#home" onClick={(e) => scrollToSection(e, "#home")} className="flex items-center gap-4 group">
-              {/* Ukuran width dan height dinaikkan dari 55 menjadi 75 */}
+            {/* Ganti a tag menjadi Link */}
+            <Link href="/" className="flex items-center gap-4 group">
               <Image 
                 src="/logo.png" 
                 alt="Maju Fleet Logo" 
@@ -163,11 +126,10 @@ export default function Navbar() {
                 height={100} 
                 className="transition-transform group-hover:scale-105" 
               />
-              {/* Ukuran teks dinaikkan dari text-[22px] menjadi text-[28px] */}
               <span className="text-[#E5B5FF] font-grotesk font-bold text-[28px] tracking-[2px] uppercase drop-shadow-[0_0_15px_rgba(176,38,255,0.4)]">
                 MAJU FLEET
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Right Area: Main Menu & Login Button */}
@@ -195,20 +157,25 @@ export default function Navbar() {
                     }}
                   >
                     <div className="flex flex-col py-4">
-                      {links.map((l) => (
-                        <a
-                          key={l.href}
-                          href={l.href}
-                          onClick={(e) => scrollToSection(e, l.href)}
-                          className={`px-6 py-3 font-grotesk text-[14px] uppercase tracking-[1px] transition-all duration-200 ${
-                            activeSection === l.href
-                              ? "text-[#E5B5FF] bg-white/5 border-l-4 border-[#B026FF]"
-                              : "text-white/70 hover:text-white hover:bg-white/5 border-l-4 border-transparent"
-                          }`}
-                        >
-                          {l.label}
-                        </a>
-                      ))}
+                      {links.map((l) => {
+                        // Cek apakah ini halaman aktif berdasarkan pathname
+                        const isActive = pathname === l.href;
+                        
+                        return (
+                          <Link
+                            key={l.href}
+                            href={l.href}
+                            onClick={() => setMainMenuDropdown(false)}
+                            className={`px-6 py-3 font-grotesk text-[14px] uppercase tracking-[1px] transition-all duration-200 ${
+                              isActive
+                                ? "text-[#E5B5FF] bg-white/5 border-l-4 border-[#B026FF]"
+                                : "text-white/70 hover:text-white hover:bg-white/5 border-l-4 border-transparent"
+                            }`}
+                          >
+                            {l.label}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 )}
@@ -241,11 +208,19 @@ export default function Navbar() {
         <AnimatePresence>
           {menuOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="md:hidden mt-4 border-y border-white/10 bg-[#0a0a0c]/95 backdrop-blur-md px-6 py-4 flex flex-col gap-2 overflow-hidden">
-              {links.map((l) => (
-                <a key={l.href} href={l.href} onClick={(e) => scrollToSection(e, l.href)} className={`font-grotesk text-[14px] font-bold uppercase py-3 border-b border-white/5 ${activeSection === l.href ? "text-[#E5B5FF]" : "text-white/60"}`}>
-                  {l.label}
-                </a>
-              ))}
+              {links.map((l) => {
+                const isActive = pathname === l.href;
+                return (
+                  <Link 
+                    key={l.href} 
+                    href={l.href} 
+                    onClick={() => setMenuOpen(false)} 
+                    className={`font-grotesk text-[14px] font-bold uppercase py-3 border-b border-white/5 ${isActive ? "text-[#E5B5FF]" : "text-white/60"}`}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
               <button onClick={() => {setMenuOpen(false); setActiveModal("login");}} className="mt-4 px-6 py-3 rounded border border-[#B026FF] text-[#E5B5FF] font-grotesk font-bold text-[13px] uppercase tracking-[1px]">
                 LOGIN DASHBOARD
               </button>

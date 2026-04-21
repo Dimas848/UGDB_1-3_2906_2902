@@ -5,22 +5,22 @@ import { MessageSquareQuote, Star } from "lucide-react";
 
 const feedbacks = [
   {
-    company: "Oceanic Trade Co.",
-    name: "Sarah Jenkins",
-    role: "Head of Port Operations",
-    text: "Maju Fleet's deployment system integrated seamlessly with our port. The scheduling precision for our standard containers cut waiting times by 30%.",
-  },
-  {
-    company: "HeavyDuty Logistics",
+    company: "Apex Heavy Industries",
     name: "Marcus Vance",
-    role: "Supply Chain Director",
-    text: "The real-time tracking on their VIP Dashboard is a game changer. We monitored our heavy machinery freight across the Pacific without a single blind spot.",
+    role: "VP of Global Logistics (Shipper)",
+    text: "Maju Fleet's deployment system integrated seamlessly with our dispatch center. The scheduling precision for our out-of-gauge shipments cut loading times by 30%. It's an absolute necessity for our global supply chain.",
   },
   {
-    company: "SeaRoutes Inc.",
-    name: "Capt. Johan",
-    role: "Fleet Commander",
-    text: "Outstanding reliability. We've routed over 50 bulk cargo shipments this quarter and their AI-driven ETA predictions were 99% accurate.",
+    company: "Quantum Tech Solutions",
+    name: "Sarah Jenkins",
+    role: "Infrastructure Director (End-Customer)",
+    text: "The real-time tracking on their VIP Dashboard is a game changer. We could monitor the delivery of our critical server racks across the Pacific without a single blind spot. Total peace of mind from port to data center.",
+  },
+  {
+    company: "Hyperion Motors",
+    name: "David Chen",
+    role: "Head of Supply Chain (Corporate Client)",
+    text: "Outstanding reliability for our high-value automotive components. We've routed over 200 priority freight shipments this quarter, and Maju Fleet's AI-driven ETA predictions kept our assembly lines running perfectly on schedule.",
   },
 ];
 
